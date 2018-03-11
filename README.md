@@ -1,1 +1,7 @@
-# Projekt-Android
+# Restaurant Helper
+
+## Opis:
+"Restaurant Helper" to aplikacja na system Android, która ma pomóc w zarządzaniu restauracjami w których wystęupuje system obsługi kelnerskiej. Program będzie posiadał system logowania jako administrator, kucharz i kelner. Konta dodawać i usuwać może tylko administrator. W domyśle jest to kierownik restauracji. Kelnerzy i kucharze mogą się logować oraz dodawać i usuwać zamówienia. Administrator dodatkowo może tworzyć i edytować tabelę zawierającą MENU. Dodawać potrawy i ich ceny. 
+
+## Schemat działania:
+Administrator rozpoczyna dzień roboczy w aplikacji. Od teraz pozostały presonel może przyjmować i realizować zamówienia. W momencie kiedy administrator zakończy dzień roboczy, pracownicy nie mają już dostępu do zamówień, a w bazie danych zostaje zapisany dzień pracy z rozliczeniem (przychód , ilość zamówień). Kelner posiada 3 funkcje: dodaj zamówienie, usuń zamówienie( w przypadku pomyłki, jeśli zamówienie zostało wydane kelner nie może go usunąć) i opłacono ( po zatwierdzeniu, zamówinie jest całkowicie zrealizowane i zostaje przekazane do rozliczenia). Kelner wybiera z dostępnego menu zamówione potrawy i zaznacza stolik. Kucharz ma tylko jedną opcje , jest to "wydanie zamówienia", które ma działanie opisane powyżej. W momencie kiedy kucharz wyda zamówienie. Kelner otrzymuje powiadomienie. Analogicznie, gdy kelner złoży zamówienie, kucharze otrzymują stosowne powiadomienia.
