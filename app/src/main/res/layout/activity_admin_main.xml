@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.piotrskorupa.restauranthelper.AdminMain">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADMIN MENU"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_weight="0.08" />
+
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.03"
+            android:text="Start Working day" />
+
+        <Button
+            android:id="@+id/button_bilans"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.08"
+            android:text="Bilans" />
+
+        <Button
+            android:id="@+id/button_worker"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.08"
+            android:text="add/remove worker" />
+
+        <Button
+            android:id="@+id/button_edit_menu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.08"
+            android:text="edit your restaurant menu" />
+
+        <Button
+            android:id="@+id/button_end"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.08"
+            android:text="end working day" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

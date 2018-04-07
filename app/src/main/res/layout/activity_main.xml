@@ -87,23 +87,31 @@
             android:textColor="@android:color/holo_green_dark"
             android:textSize="12dp" />
 
-        <CheckBox
-            android:id="@+id/admin"
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:text="Admin" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="97dp" >
 
-        <CheckBox
-            android:id="@+id/kelner"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="Waiter" />
+            <RadioButton
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Admin" />
 
-        <CheckBox
-            android:id="@+id/kucharz"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="Cook" />
+            <RadioButton
+                android:id="@+id/kelner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Waiter" />
+
+            <RadioButton
+                android:id="@+id/kucharz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cook" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/loguj"
