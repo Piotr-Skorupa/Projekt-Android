@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     user.setRestaurant(userRestaurantPlace.getText().toString());
                     user.setFunction(function);
                     try {
-                        if (user.connection() == "OK"){
+                        if (user.connectionForLoging() == "OK"){
                             Intent adminIntent = new Intent(MainActivity.this, AdminMain.class);
                             adminIntent.putExtra("login", user.getLogin());
                             adminIntent.putExtra("pass", user.getPassword());
@@ -93,8 +93,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (checkState()){
                     //TODO:rejestracja
+                    user.setLogin(userLoginPlace.getText().toString());
+                    user.setPassword(userPasswordPlace.getText().toString());
+                    user.setRestaurant(userRestaurantPlace.getText().toString());
+                    user.setFunction(function);
                     if (function == 1){
-                        Toast.makeText(MainActivity.this, "Rejestrujemy!", Toast.LENGTH_SHORT).show();
+                        try{
+                            if (user.connectionForRegister() == "OK"){
+                                Toast.makeText(MainActivity.this, "Succesfully registered! You can sign in now.", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }else
                     {
                         Toast.makeText(MainActivity.this, "Only Admin, can Create Account!", Toast.LENGTH_SHORT).show();

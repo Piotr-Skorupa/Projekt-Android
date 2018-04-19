@@ -76,7 +76,11 @@ public class User {
     public String getRestaurant() {return restaurant;}
     public String getFunction() {return function;}
 
-    private class connectDatabase extends AsyncTask<String, String, String>{
+
+    // ****************************** LOGOWANIE **********************************************************************
+    //---------------------------------------------------------------------------------------------------------------
+
+    private class logingToDatabase extends AsyncTask<String, String, String>{
 
         @Override
         protected String doInBackground(String... params) {
@@ -114,12 +118,119 @@ public class User {
     }
 
 
-    public String connection() throws ExecutionException, InterruptedException {
+    // ****************************** REJESTROWANIE **********************************************************************
+    //---------------------------------------------------------------------------------------------------------------
 
-       return new connectDatabase().execute(response).get();
+    private class registerToDatabase extends AsyncTask<String, String, String>{
 
+        @Override
+        protected String doInBackground(String... params) {
+
+            try
+            {
+
+
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con=DriverManager.getConnection(connStr, user, pass);
+                if (con == null){
+                    response = "something go wrong";
+                }
+                else{
+
+                    st=con.prepareStatement("select * from users where restaurant='"+restaurant+"'");
+                    rs=st.executeQuery();
+                    if  (!rs.isBeforeFirst() ) {
+
+                        // TODO: Rejestracja i tworzenie tabel dla restauracji
+
+
+                        st = con.prepareStatement("CREATE TABLE IF NOT EXISTS " + restaurant + "menu(\n" +
+                                "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                                "  `potrawa` varchar(45) DEFAULT NULL,\n" +
+                                "  `cena` varchar(45) DEFAULT NULL,\n" +
+                                "  `dostepnosc` varchar(45) DEFAULT NULL,\n" +
+                                "  PRIMARY KEY (`id`)\n" +
+                                ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+                        st.executeUpdate();
+
+
+                        st = con.prepareStatement("INSERT INTO users(login, password, restaurant, function) VALUES('" + login + "', '" + password + "', '" + restaurant + "', '" + function + "')");
+                        st.executeUpdate();
+
+
+                        response = "OK";
+                    }
+                    else{
+                        rs.next();
+                        response = "This restaurant already exists in our database";
+                    }
+                }
+                con.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                response = "Database Connection Error";
+            }
+
+            return response;
+        }
+    }
+
+
+    // ****************************** POBIERANIE MENU **********************************************************************
+    //---------------------------------------------------------------------------------------------------------------
+
+    private class menuFromDatabase extends AsyncTask<String, String, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try
+            {
+
+
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con=DriverManager.getConnection(connStr, user, pass);
+                if (con == null){
+                    response = "something go wrong";
+                }
+                else{
+
+                    st=con.prepareStatement("select * from "+restaurant+"menu");
+                    rs=st.executeQuery();
+                    if  (!rs.isBeforeFirst() ) {
+                        response = "Login or Password is incorrect!";
+                    }else{
+                        rs.next();
+                        response = "OK";
+                    }
+                }
+                con.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                response = "Database Connection Error";
+            }
+
+            return response;
+        }
+    }
+
+
+
+
+    public String connectionForLoging() throws ExecutionException, InterruptedException {
+
+       return new logingToDatabase().execute(response).get();
 
     }
 
+    public String connectionForRegister() throws ExecutionException, InterruptedException {
+
+        return new registerToDatabase().execute(response).get();
+
+    }
 
 }
