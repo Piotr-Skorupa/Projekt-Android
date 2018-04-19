@@ -3,6 +3,7 @@ package com.example.piotrskorupa.restauranthelper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class AdminMain extends AppCompatActivity {
@@ -37,6 +38,20 @@ public class AdminMain extends AppCompatActivity {
         editMenuButton = (Button) findViewById(R.id.button_edit_menu);
         workerButton = (Button) findViewById(R.id.button_worker);
         bilansButton = (Button) findViewById(R.id.button_bilans);
+
+        editMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intentMenu = new Intent(AdminMain.this, AdminMenu.class);
+                intentMenu.putExtra("login", user.getLogin());
+                intentMenu.putExtra("pass", user.getPassword());
+                intentMenu.putExtra("res", user.getRestaurant());
+                intentMenu.putExtra("func", user.getFunction());
+                startActivity(intentMenu);
+
+
+            }});
 
     }
 }
