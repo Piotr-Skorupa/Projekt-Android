@@ -26,7 +26,7 @@ public class User {
     static PreparedStatement st;
     static Connection con;
 
-    private final String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
+    private String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
     private final String user = "root";
     private final String pass = "alamakota";
 
@@ -88,7 +88,7 @@ public class User {
             try
             {
 
-
+                connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 con=DriverManager.getConnection(connStr, user, pass);
                 if (con == null){
@@ -142,23 +142,68 @@ public class User {
                     if  (!rs.isBeforeFirst() ) {
 
                         // TODO: Rejestracja i tworzenie tabel dla restauracji
-
-
-                        st = con.prepareStatement("CREATE TABLE IF NOT EXISTS " + restaurant + "menu(\n" +
-                                "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                                "  `potrawa` varchar(45) DEFAULT NULL,\n" +
-                                "  `cena` varchar(45) DEFAULT NULL,\n" +
-                                "  `dostepnosc` varchar(45) DEFAULT NULL,\n" +
-                                "  PRIMARY KEY (`id`)\n" +
-                                ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+                        st = con.prepareStatement("CREATE DATABASE IF NOT EXISTS "+ restaurant + "");
                         st.executeUpdate();
-
 
                         st = con.prepareStatement("INSERT INTO users(login, password, restaurant, function) VALUES('" + login + "', '" + password + "', '" + restaurant + "', '" + function + "')");
                         st.executeUpdate();
 
+                        con.close();
 
-                        response = "OK";
+                        connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+restaurant+"?zeroDateTimeBehavior=convertToNull";
+
+                        con = DriverManager.getConnection(connStr, user, pass);
+                        if (con == null){
+                            response = "something go wrong";
+                            return response;
+                        }else {
+
+                            // menu
+                            st = con.prepareStatement("CREATE TABLE IF NOT EXISTS menu(\n" +
+                                    "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                                    "  `potrawa` varchar(45) NOT NULL,\n" +
+                                    "  `cena` DOUBLE(11,2) NOT NULL,\n" +
+                                    "  `dostepnosc` varchar(45) DEFAULT NULL,\n" +
+                                    "  PRIMARY KEY (`id`)\n" +
+                                    ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+                            st.executeUpdate();
+
+                            // working day
+                            st = con.prepareStatement("CREATE TABLE IF NOT EXISTS working_day(\n" +
+                                    "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                                    "  `isWorkingDay` varchar(45) NOT NULL,\n" +
+                                    "   PRIMARY KEY (`id`)\n" +
+                                    "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+
+                            st.executeUpdate();
+
+                            //zamowienie
+                            st = con.prepareStatement("CREATE TABLE IF NOT EXISTS  zamowienie(\n" +
+                                    "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                                    "  `tresc_zamowienia` varchar(3000) NOT NULL,\n" +
+                                    "  `nr_stolu` INT NOT NULL,\n" +
+                                    "  `cena` varchar(45) NOT NULL,\n" +
+                                    "  `dodatkowe_info` varchar(45) DEFAULT NULL,\n" +
+                                    "  `wydano` varchar(45) NOT NULL DEFAULT 'nie wydano',\n" +
+                                    "  `oplacono` varchar(45) NOT NULL DEFAULT 'nie oplacono',\n" +
+                                    "  `kto_obsluguje` varchar(45) DEFAULT NULL,\n" +
+                                    "  PRIMARY KEY (`id`)\n" +
+                                    "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+                            st.executeUpdate();
+
+                            //bilans
+                            st = con.prepareStatement("CREATE TABLE IF NOT EXISTS  bilans(\n" +
+                                    "   `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                                    "   `data` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP UNIQUE,\n" +
+                                    "   `przychod` INT NOT NULL,\n" +
+                                    "   `ilosc_zmowien` INT NOT NULL,\n" +
+                                    "   PRIMARY KEY (`id`)\n" +
+                                    "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+
+                            st.executeUpdate();
+
+                            response = "OK";
+                        }
                     }
                     else{
                         rs.next();
@@ -170,7 +215,7 @@ public class User {
             catch(Exception e)
             {
                 e.printStackTrace();
-                response = "Database Connection Error";
+                response = "Database Connection Error or Restaurant already exists";
             }
 
             return response;
