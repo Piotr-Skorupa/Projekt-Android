@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminMain" />
-        <activity android:name=".AdminMenu"></activity>
+        <activity android:name=".AdminMenu" />
+        <activity android:name=".Admin_zarzadzanie" />
+        <activity android:name=".WorkersList"></activity>
     </application>
 
 </manifest>

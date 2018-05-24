@@ -42,14 +42,14 @@ public class AdminMenu extends AppCompatActivity {
 
 
     private final String defaultName = "Dish name";
-    private final String defaultPrice = "0,00zl";
+    private final String defaultPrice = "0.00";
 
     public String response;
     static ResultSet rs;
     static PreparedStatement st;
     static Connection con;
 
-    private final String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
+    private String connStr;
     private final String user = "root";
     private final String pass = "alamakota";
 
@@ -83,6 +83,7 @@ public class AdminMenu extends AppCompatActivity {
         res = intent.getStringExtra("res");
         fun = intent.getStringExtra("func");
 
+        connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
         User client = new User(log, pass, res, fun);
 
         //poberanie listy z bazy danych
@@ -281,7 +282,7 @@ public class AdminMenu extends AppCompatActivity {
             TextView cena = (TextView) convertView.findViewById(R.id.dish_price);
             int nr = position + 1;
             name.setText(nr +". "+ nazwy.get(position));
-            cena.setText(ceny.get(position));
+            cena.setText(ceny.get(position)+" zl");
 
             if (dostepnosci.get(position).equals("avaible")){
                 name.setTextColor(Color.GREEN);
@@ -348,7 +349,7 @@ public class AdminMenu extends AppCompatActivity {
                 }
                 else{
 
-                    st=con.prepareStatement("select * from "+res+"menu");
+                    st=con.prepareStatement("select * from menu");
                     rs=st.executeQuery();
                     if  (!rs.isBeforeFirst() ) {
                         response = "Empty!";
@@ -394,7 +395,7 @@ public class AdminMenu extends AppCompatActivity {
                 }
                 else{
 
-                    st=con.prepareStatement("INSERT INTO "+res+"menu (potrawa, cena, dostepnosc) VALUES ('"+name+"','"+price+"','"+dostep+"')");
+                    st=con.prepareStatement("INSERT INTO menu (potrawa, cena, dostepnosc) VALUES ('"+name+"','"+price+"','"+dostep+"')");
                     st.executeUpdate();
 
 
@@ -431,7 +432,7 @@ public class AdminMenu extends AppCompatActivity {
                 }
                 else{
 
-                    st=con.prepareStatement("DELETE FROM "+res+"menu WHERE potrawa='"+name+"' AND cena='"+price+"'");
+                    st=con.prepareStatement("DELETE FROM menu WHERE potrawa='"+name+"' AND cena='"+price+"'");
                     st.executeUpdate();
 
 
@@ -468,7 +469,7 @@ public class AdminMenu extends AppCompatActivity {
                 }
                 else{
 
-                    st=con.prepareStatement("UPDATE "+res+"menu SET potrawa='"+name+"', cena='"+price+"', dostepnosc='"+dostep+"' WHERE potrawa='"+clickedname+"'");
+                    st=con.prepareStatement("UPDATE menu SET potrawa='"+name+"', cena='"+price+"', dostepnosc='"+dostep+"' WHERE potrawa='"+clickedname+"'");
                     st.executeUpdate();
 
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.piotrskorupa.restauranthelper.WorkersList">
+
+    <TextView
+        android:id="@+id/textViewWorkers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Workers:"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_weight="0.08"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <ListView
+        android:id="@+id/worker_list"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+
+
+    </LinearLayout>
