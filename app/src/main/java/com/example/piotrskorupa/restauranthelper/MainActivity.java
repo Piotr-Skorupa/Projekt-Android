@@ -63,12 +63,14 @@ public class MainActivity extends AppCompatActivity {
                     user.setFunction(function);
                     try {
                         if (user.connectionForLoging() == "OK"){
-                            Intent adminIntent = new Intent(MainActivity.this, AdminMain.class);
-                            adminIntent.putExtra("login", user.getLogin());
-                            adminIntent.putExtra("pass", user.getPassword());
-                            adminIntent.putExtra("res", user.getRestaurant());
-                            adminIntent.putExtra("func", user.getFunction());
-                            startActivity(adminIntent);
+                            if (function == 1){
+                                Intent adminIntent = new Intent(MainActivity.this, AdminMain.class);
+                                adminIntent.putExtra("login", user.getLogin());
+                                adminIntent.putExtra("pass", user.getPassword());
+                                adminIntent.putExtra("res", user.getRestaurant());
+                                adminIntent.putExtra("func", user.getFunction());
+                                startActivity(adminIntent);
+                            }
                         }else{
                             Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
                         }
