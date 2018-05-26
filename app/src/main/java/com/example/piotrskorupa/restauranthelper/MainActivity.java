@@ -71,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
                                 adminIntent.putExtra("func", user.getFunction());
                                 startActivity(adminIntent);
                             }
+                            if (function == 2)
+                            {
+                                Intent waiterIntent = new Intent(MainActivity.this, WaiterMenu.class);
+                                waiterIntent.putExtra("login", user.getLogin());
+                                waiterIntent.putExtra("pass", user.getPassword());
+                                waiterIntent.putExtra("res", user.getRestaurant());
+                                waiterIntent.putExtra("func", user.getFunction());
+                                startActivity(waiterIntent);
+                            }
+
                         }else{
                             Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
                         }
