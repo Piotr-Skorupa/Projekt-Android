@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                 waiterIntent.putExtra("func", user.getFunction());
                                 startActivity(waiterIntent);
                             }
+
                         }else{
                             Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
                         }

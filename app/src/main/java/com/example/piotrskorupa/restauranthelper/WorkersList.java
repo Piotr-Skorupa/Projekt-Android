@@ -40,6 +40,7 @@ public class WorkersList extends AppCompatActivity {
     static Connection con;
     WorkersList.CustomAdapter customer;
 
+
     private String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
     private final String user = "root";
     private final String pass = "alamakota";
@@ -149,7 +150,9 @@ public class WorkersList extends AppCompatActivity {
 
             try
             {
+
                 connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
+
                 nazwy.clear();
                 funkcje.clear();
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -158,6 +161,7 @@ public class WorkersList extends AppCompatActivity {
                     response = "something go wrong";
                 }
                 else{
+
 
                     st=con.prepareStatement("select * from users");
                     rs=st.executeQuery();
@@ -192,6 +196,7 @@ public class WorkersList extends AppCompatActivity {
 
             try
             {
+
                 connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 con= DriverManager.getConnection(connStr, user, pass);
@@ -202,7 +207,6 @@ public class WorkersList extends AppCompatActivity {
 
                     st=con.prepareStatement("delete from users where restaurant='"+res+"' and login='"+clicked_name+"'");
                     st.executeUpdate();
-
 
                     connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
                     con = DriverManager.getConnection(connStr, user, pass);
@@ -215,6 +219,7 @@ public class WorkersList extends AppCompatActivity {
                         st.executeUpdate();
 
                     }
+
                     response = "OK";
                 }
                 con.close();

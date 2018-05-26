@@ -141,7 +141,6 @@ public class User {
                     rs=st.executeQuery();
                     if  (!rs.isBeforeFirst() ) {
 
-                        //TODO: Sprawdzic poprawnosc dzialania bazy danych
                         st = con.prepareStatement("CREATE DATABASE IF NOT EXISTS "+ restaurant + "");
                         st.executeUpdate();
 
@@ -158,7 +157,7 @@ public class User {
                             return response;
                         }else {
 
-                            //restaurant_users
+                           //restaurant_users
                             st = con.prepareStatement("CREATE TABLE IF NOT EXISTS users(\n" +
                                     " `idu` INT NOT NULL AUTO_INCREMENT,\n" +
                                     " `login` varchar(45) NOT NULL,\n" +
@@ -180,14 +179,15 @@ public class User {
 
                             // working day
                             st = con.prepareStatement("CREATE TABLE IF NOT EXISTS working_day(\n" +
+
                                     "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                                    "  `isWorkingDay` TINYINT NOT NULL,\n" +
+                                    "  `isWorkingDay` TINYINT NOT NULL,\n" +                              
                                     "   PRIMARY KEY (`id`)\n" +
                                     "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
 
                             st.executeUpdate();
 
-                            st = con.prepareStatement("INSERT INTO working_day(id, isWorkingDay) VALUES(1, 0)");
+                            st = con.prepareStatement("INSERT INTO working_day(id, isWorkingDay) VALUES(1, 0)");   
                             st.executeUpdate();
 
                             //zamowienie
@@ -202,6 +202,7 @@ public class User {
                                     "  FOREIGN KEY (`u_id`) REFERENCES users (`idu`)\n" +
                                     "  ON UPDATE RESTRICT ON DELETE RESTRICT)" +
                                     "  ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+
                             st.executeUpdate();
 
                             //bilans
@@ -229,6 +230,7 @@ public class User {
                                     "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
 
                             st.executeUpdate();
+
 
                             response = "OK";
                         }
@@ -287,10 +289,15 @@ public class User {
                         st = con.prepareStatement("INSERT INTO users(login, function) VALUES('" + login + "', '" + function + "')");
                         st.executeUpdate();
 
+
                         response = "OK";
 
 
                     }
+
+
+
+                 
                 }
                 con.close();
             }
@@ -305,6 +312,96 @@ public class User {
     }
 
 
+
+
+
+    // ****************************** START DNIA ROBOCZEGO **********************************************************************
+    //---------------------------------------------------------------------------------------------------------------
+
+    private class startWorkingDay extends AsyncTask<String, String, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try
+            {
+
+                connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+restaurant+"?zeroDateTimeBehavior=convertToNull";
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con=DriverManager.getConnection(connStr, user, pass);
+                if (con == null){
+                    response = "something go wrong";
+
+                }
+                else{
+
+                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay='yes' where id=1");
+                    st.executeUpdate();
+
+                }
+                response = "Let's the working begin!";
+                con.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                response = "Database Connection Error";
+            }
+
+            return response;
+        }
+    }
+
+
+
+    // ****************************** KONIEC DNIA ROBOCZEGO **********************************************************************
+    //---------------------------------------------------------------------------------------------------------------
+
+    private class endWorkingDay extends AsyncTask<String, String, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try
+            {
+
+                connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+restaurant+"?zeroDateTimeBehavior=convertToNull";
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con=DriverManager.getConnection(connStr, user, pass);
+                if (con == null){
+                    response = "something go wrong";
+                }
+                else{
+
+                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay='no' where id=1");
+                    st.executeUpdate();
+
+                }
+                response = "The day has been finished!";
+                con.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                response = "Database Connection Error";
+            }
+
+            return response;
+        }
+    }
+
+
+    public String startDay() throws ExecutionException, InterruptedException {
+
+        return new startWorkingDay().execute(response).get();
+
+    }
+
+    public String endDay() throws ExecutionException, InterruptedException {
+
+        return new endWorkingDay().execute(response).get();
+
+    }
 
 
 

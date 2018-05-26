@@ -24,6 +24,7 @@
         <activity android:name=".WorkersList" />
         <activity android:name=".WaiterMenu" />
         <activity android:name=".WaiterAddOrder"></activity>
+
     </application>
 
 </manifest>
