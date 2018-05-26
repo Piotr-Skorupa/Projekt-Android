@@ -18,7 +18,7 @@
             android:id="@+id/textViewMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MAIN MENU"
+            android:text="RESTAURANT MENU"
             android:textSize="20dp"
             android:gravity="center"
             android:textColor="@android:color/holo_green_dark"
