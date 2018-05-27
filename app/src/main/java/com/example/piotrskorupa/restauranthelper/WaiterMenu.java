@@ -50,13 +50,12 @@ public class WaiterMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Intent intentMenu = new Intent(WaiterMenu.this, AdminMenu.class);
-                //intentMenu.putExtra("login", user.getLogin());
-               // intentMenu.putExtra("pass", user.getPassword());
-               // intentMenu.putExtra("res", user.getRestaurant());
-               // intentMenu.putExtra("func", user.getFunction());
-               // startActivity(intentMenu);
-
+                Intent intentList = new Intent(WaiterMenu.this, WaiterOrderList.class);
+                intentList.putExtra("login", user.getLogin());
+                intentList.putExtra("pass", user.getPassword());
+                intentList.putExtra("res", user.getRestaurant());
+                intentList.putExtra("func", user.getFunction());
+                startActivity(intentList);
 
             }});
 

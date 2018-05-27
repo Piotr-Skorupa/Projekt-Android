@@ -23,8 +23,13 @@
         <activity android:name=".Admin_zarzadzanie" />
         <activity android:name=".WorkersList" />
         <activity android:name=".WaiterMenu" />
+<<<<<<< HEAD
         <activity android:name=".WaiterAddOrder"></activity>
 
+=======
+        <activity android:name=".WaiterAddOrder" />
+        <activity android:name=".WaiterOrderList"></activity>
+>>>>>>> Skonczony Kelner
     </application>
 
 </manifest>

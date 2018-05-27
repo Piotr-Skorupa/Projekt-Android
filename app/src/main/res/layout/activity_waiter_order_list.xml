@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.example.piotrskorupa.restauranthelper.WaiterOrderList">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CURRENT ORDER LIST"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/holo_green_dark"
+            />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:  "
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Table: "
+            />
+    </LinearLayout>
+
+    <ListView
+            android:id="@+id/list_order_waiter"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+
+        />
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REFRESH"
+        />
+    <TextView
+        android:id="@+id/waiter_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WAITER:"
+        />
+    <TextView
+        android:id="@+id/dish_name3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DISHES:"
+        />
+    <TextView
+        android:id="@+id/price_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRICE:"
+        />
+    <TextView
+        android:id="@+id/info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INFO:"
+        />
+
+</LinearLayout>
+
