@@ -21,7 +21,12 @@
         <activity android:name=".AdminMain" />
         <activity android:name=".AdminMenu" />
         <activity android:name=".Admin_zarzadzanie" />
-        <activity android:name=".WorkersList"></activity>
+        <activity android:name=".WorkersList" />
+        <activity android:name=".WaiterMenu" />
+        <activity android:name=".WaiterAddOrder" />
+        <activity android:name=".WaiterOrderList" />
+        <activity android:name=".CookMain" />
+        <activity android:name=".AdminBilans"></activity>
     </application>
 
 </manifest>

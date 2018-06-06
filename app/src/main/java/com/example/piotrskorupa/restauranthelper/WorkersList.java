@@ -40,7 +40,7 @@ public class WorkersList extends AppCompatActivity {
     static Connection con;
     WorkersList.CustomAdapter customer;
 
-    private final String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
+    private String connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
     private final String user = "root";
     private final String pass = "alamakota";
 
@@ -149,6 +149,7 @@ public class WorkersList extends AppCompatActivity {
 
             try
             {
+                connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
                 nazwy.clear();
                 funkcje.clear();
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -158,7 +159,7 @@ public class WorkersList extends AppCompatActivity {
                 }
                 else{
 
-                    st=con.prepareStatement("select * from users where restaurant='"+res+"' and not function='admin'");
+                    st=con.prepareStatement("select * from users");
                     rs=st.executeQuery();
                     if  (!rs.isBeforeFirst() ) {
                         response = "Empty!";
@@ -191,7 +192,7 @@ public class WorkersList extends AppCompatActivity {
 
             try
             {
-
+                connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/Restaurants?zeroDateTimeBehavior=convertToNull";
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 con= DriverManager.getConnection(connStr, user, pass);
                 if (con == null){
@@ -201,6 +202,19 @@ public class WorkersList extends AppCompatActivity {
 
                     st=con.prepareStatement("delete from users where restaurant='"+res+"' and login='"+clicked_name+"'");
                     st.executeUpdate();
+
+
+                    connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
+                    con = DriverManager.getConnection(connStr, user, pass);
+                    if (con == null){
+                        response = "something go wrong";
+                        return response;
+                    }else {
+
+                        st=con.prepareStatement("delete from users where login='"+clicked_name+"'");
+                        st.executeUpdate();
+
+                    }
                     response = "OK";
                 }
                 con.close();
