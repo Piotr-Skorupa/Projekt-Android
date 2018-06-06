@@ -27,6 +27,7 @@
         <activity android:name=".WaiterOrderList" />
         <activity android:name=".CookMain" />
         <activity android:name=".AdminBilans"></activity>
+
     </application>
 
 </manifest>

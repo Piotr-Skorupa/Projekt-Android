@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if (function == 2)
                             {
+
                                 // WAITER SIGN IN SECTION
+
 
                                 Intent waiterIntent = new Intent(MainActivity.this, WaiterMenu.class);
                                 waiterIntent.putExtra("login", user.getLogin());
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                 waiterIntent.putExtra("func", user.getFunction());
                                 startActivity(waiterIntent);
                             }
+
                             if (function == 3)
                             {
                                 // COOK SIGN IN SECTION
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                                 cookIntent.putExtra("func", user.getFunction());
                                 startActivity(cookIntent);
                             }
+
 
                         }else{
                             Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
