@@ -157,7 +157,8 @@ public class User {
                             return response;
                         }else {
 
-                           //restaurant_users
+                            //restaurant_users
+
                             st = con.prepareStatement("CREATE TABLE IF NOT EXISTS users(\n" +
                                     " `idu` INT NOT NULL AUTO_INCREMENT,\n" +
                                     " `login` varchar(45) NOT NULL,\n" +
@@ -179,13 +180,15 @@ public class User {
 
                             // working day
                             st = con.prepareStatement("CREATE TABLE IF NOT EXISTS working_day(\n" +
-
                                     "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                                    "  `isWorkingDay` TINYINT NOT NULL,\n" +                              
+                                    "  `isWorkingDay` TINYINT NOT NULL,\n" +
                                     "   PRIMARY KEY (`id`)\n" +
                                     "   )ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
 
                             st.executeUpdate();
+
+
+                            st = con.prepareStatement("INSERT INTO working_day(id, isWorkingDay) VALUES(1, 0)");
 
                             st = con.prepareStatement("INSERT INTO working_day(id, isWorkingDay) VALUES(1, 0)");   
                             st.executeUpdate();
@@ -295,9 +298,6 @@ public class User {
 
                     }
 
-
-
-                 
                 }
                 con.close();
             }
@@ -335,7 +335,7 @@ public class User {
                 }
                 else{
 
-                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay='yes' where id=1");
+                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay=1 where id=1");
                     st.executeUpdate();
 
                 }
@@ -373,8 +373,9 @@ public class User {
                 }
                 else{
 
-                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay='no' where id=1");
+                    st=con.prepareStatement("UPDATE working_day SET isWorkingDay=0 where id=1");
                     st.executeUpdate();
+
 
                 }
                 response = "The day has been finished!";

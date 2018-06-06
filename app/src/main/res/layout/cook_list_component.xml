@@ -5,51 +5,34 @@
 
 
     <TextView
-        android:id="@+id/numer_zamowienia"
+        android:id="@+id/numer_zamowienia2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"
         android:textSize="20dp"
-    />
+        />
 
     <TextView
-        android:id="@+id/numer_stolu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="20dp"
-    />
-
-    <TextView
-        android:id="@+id/wydano"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
+        android:text="ORDER"
         android:textSize="20dp"
         />
 
     <Button
-        android:id="@+id/info_button"
-        android:layout_width="30dp"
+        android:id="@+id/info_button2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="i"
+        android:text="info"
         />
     <Button
-        android:id="@+id/oplac"
-        android:layout_width="60dp"
+        android:id="@+id/wydaj2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PAY"
-    />
-    <Button
-        android:id="@+id/usun"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="DEL"
-
+        android:text="done"
         />
 
-    </LinearLayout>
+</LinearLayout>

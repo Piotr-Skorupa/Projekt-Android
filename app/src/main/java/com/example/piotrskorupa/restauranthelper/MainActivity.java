@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logowanie;
     private Button rejestracja;
 
-    private int function;      // 1 = admin; 2 = kelner; 3 = kucharz;
+    private int function;      // 1 = admin; 2 = waiter; 3 = cook;
     User user;
     private String loginResult;
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (checkState()){
-                    //TODO:logowanie
+
                     user.setLogin(userLoginPlace.getText().toString());
                     user.setPassword(userPasswordPlace.getText().toString());
                     user.setRestaurant(userRestaurantPlace.getText().toString());
@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         if (user.connectionForLoging() == "OK"){
                             if (function == 1){
+
+                                // ADMIN SIGN IN SECTION
+
                                 Intent adminIntent = new Intent(MainActivity.this, AdminMain.class);
                                 adminIntent.putExtra("login", user.getLogin());
                                 adminIntent.putExtra("pass", user.getPassword());
@@ -73,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if (function == 2)
                             {
+
+                                // WAITER SIGN IN SECTION
+
+
                                 Intent waiterIntent = new Intent(MainActivity.this, WaiterMenu.class);
                                 waiterIntent.putExtra("login", user.getLogin());
                                 waiterIntent.putExtra("pass", user.getPassword());
@@ -80,6 +87,19 @@ public class MainActivity extends AppCompatActivity {
                                 waiterIntent.putExtra("func", user.getFunction());
                                 startActivity(waiterIntent);
                             }
+
+                            if (function == 3)
+                            {
+                                // COOK SIGN IN SECTION
+
+                                Intent cookIntent = new Intent(MainActivity.this, CookMain.class);
+                                cookIntent.putExtra("login", user.getLogin());
+                                cookIntent.putExtra("pass", user.getPassword());
+                                cookIntent.putExtra("res", user.getRestaurant());
+                                cookIntent.putExtra("func", user.getFunction());
+                                startActivity(cookIntent);
+                            }
+
 
                         }else{
                             Toast.makeText(MainActivity.this, user.response, Toast.LENGTH_SHORT).show();
@@ -104,8 +124,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (checkState()){
-                    //TODO:rejestracja
-                    user.setLogin(userLoginPlace.getText().toString());
+
+                    // SIGN UP SECTION - ONLY ADMIN CAN ADD A RESTAURANT ACCOUNT
+
+                    user.setLogin(userLoginPlace.getText().toString());            //converting EditText fields to strings
                     user.setPassword(userPasswordPlace.getText().toString());
                     user.setRestaurant(userRestaurantPlace.getText().toString());
                     user.setFunction(function);
@@ -141,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected boolean checkState(){
+
+        // function checking fill of EditTexts and CheckBoxes
+        // if empty you can not create account or sign in
 
         if (userLoginPlace.getText().toString().equals("")
                 || userPasswordPlace.getText().toString().equals("")

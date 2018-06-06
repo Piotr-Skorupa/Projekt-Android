@@ -152,7 +152,6 @@ public class WorkersList extends AppCompatActivity {
             {
 
                 connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
-
                 nazwy.clear();
                 funkcje.clear();
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -161,7 +160,6 @@ public class WorkersList extends AppCompatActivity {
                     response = "something go wrong";
                 }
                 else{
-
 
                     st=con.prepareStatement("select * from users");
                     rs=st.executeQuery();
@@ -207,6 +205,7 @@ public class WorkersList extends AppCompatActivity {
 
                     st=con.prepareStatement("delete from users where restaurant='"+res+"' and login='"+clicked_name+"'");
                     st.executeUpdate();
+
 
                     connStr = "jdbc:mysql://node54808-pskorupa.unicloud.pl:3306/"+res+"?zeroDateTimeBehavior=convertToNull";
                     con = DriverManager.getConnection(connStr, user, pass);
